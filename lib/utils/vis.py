@@ -9,6 +9,8 @@ import cv2 as cv
 import seaborn as sns
 from PIL import ImageColor
 
+import sys
+sys.path.append('.')
 
 FFMPEG_PATH = '/usr/bin/ffmpeg' if osp.exists('/usr/bin/ffmpeg') else 'ffmpeg'
 font_files = {
@@ -50,7 +52,11 @@ def images_to_video(img_dir, out_path, img_fmt="%06d.jpg", fps=30, crf=25, verbo
 
 def video_to_images(video_path, out_path, img_fmt="%06d.jpg", fps=30, verbose=True):
     os.makedirs(out_path, exist_ok=True)
-    cmd = [FFMPEG_PATH, '-i', video_path, '-r', f'{fps}', f'{out_path}/{img_fmt}']
+    # video_path = R'E:\zc_codes\GLAMR\assets\dynamic\running.mp4'
+    # cmd = [FFMPEG_PATH, '-i', video_path, '-r', f'{fps}', f'{out_path}/{img_fmt}']
+    cmd = ['cmd.exe', '/c', FFMPEG_PATH, '-i', video_path, '-r', f'{fps}', f'{out_path}/{img_fmt}']
+    # print(cmd) # ['ffmpeg', '-i', 'assets/dynamic/running.mp4', '-r', '30', 'out/glamr_dynamic/running/pose_est\\frames/%06d.jpg']
+    # ffmpeg -i assets/dynamic/running.mp4 -r 30 out/glamr_dynamic/running/pose_est\\frames/%06d.jpg
     if not verbose:
         cmd += ['-hide_banner', '-loglevel', 'error']
     p = subprocess.run(cmd)

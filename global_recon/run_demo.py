@@ -1,5 +1,6 @@
 import os, sys
 sys.path.append(os.path.join(os.getcwd()))
+sys.path.append('.')
 import os.path as osp
 import glob
 import torch
@@ -16,6 +17,12 @@ from global_recon.vis.vis_grecon import GReconVisualizer
 from global_recon.vis.vis_cfg import demo_seq_render_specs as seq_render_specs
 from pose_est.run_pose_est_demo import run_pose_est_on_video
 
+sys.argv[1:] = [
+        '--cfg', 'glamr_dynamic',
+        '--video_path' ,'assets/dynamic/running.mp4' ,
+        '--out_dir' ,'out/glamr_dynamic/running' ,
+        '--save_video'
+]
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cfg', default='glamr_static')

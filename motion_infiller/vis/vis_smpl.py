@@ -8,7 +8,8 @@ from lib.utils.visualizer3d import Visualizer3D
 from lib.models.smpl import SMPL, SMPL_MODEL_DIR
 from motion_infiller.data.amass_dataset import AMASSDataset
 from torch.utils.data import DataLoader
-from pyvista.plotting.tools import parse_color
+# from pyvista.plotting.tools import parse_color
+from pyvista.plotting.colors import Color
 from vtk import vtkTransform
 from lib.utils.torch_transform import quat_apply, quat_between_two_vec, quaternion_to_angle_axis, angle_axis_to_quaternion
 
@@ -35,7 +36,8 @@ class SMPLActor():
         self.actor.SetVisibility(flag)
 
     def set_color(self, color):
-        rgb_color = parse_color(color)
+        # rgb_color = parse_color(color)
+        rgb_color = Color(color)
         self.actor.GetProperty().SetColor(rgb_color)
 
 
@@ -103,7 +105,7 @@ class SkeletonActor():
             actor.SetVisibility(flag)
 
     def set_color(self, color):
-        rgb_color = parse_color(color)
+        rgb_color = Color(color)
         for actor in self.joint_actors:
             actor.GetProperty().SetColor(rgb_color)
         for actor in self.jbone_actors:
